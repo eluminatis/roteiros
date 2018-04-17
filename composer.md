@@ -44,6 +44,8 @@ Escolher um dos disponíveis que o Composer sugere. Os nomes são autoexplicativ
 
 Para escolher um tipo de licença existe um site interessante [aqui](http://choosealicense.com/)
 
+O Composer tem as strings válidas para cada tipo de licença, que devem seguir o padrão abaixo
+
 - Apache-2.0
 - BSD-2-Clause
 - BSD-3-Clause
