@@ -63,7 +63,7 @@ Uma vez gerada vc pode chamar os atributos dela mesmo dentro de um loop que semp
 	text($maxNbChars = 200)
 	// 'Fuga totam reiciendis qui architecto fugiat nemo. Consequatur recusandae qui cupiditate eos quod.'
 	
-###Datas
+### Datas
 
 	unixTime($max = 'now')                // 58781813
 	dateTime($max = 'now', $timezone = null) // DateTime('2008-04-25 08:37:17', 'UTC')
