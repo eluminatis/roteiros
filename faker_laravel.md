@@ -63,6 +63,45 @@ Uma vez gerada vc pode chamar os atributos dela mesmo dentro de um loop que semp
 	text($maxNbChars = 200)
 	// 'Fuga totam reiciendis qui architecto fugiat nemo. Consequatur recusandae qui cupiditate eos quod.'
 	
+### Empresas
+
+	catchPhrase             // 'Monitored regional contingency'
+	bs                      // 'e-enable robust architectures'
+	company                 // 'Bogan-Treutel'
+	companySuffix           // 'and Sons'
+	jobTitle                // 'Cashier'
+	
+### Pessoas
+
+	title($gender = null|'male'|'female')     // 'Ms.'
+	titleMale                                 // 'Mr.'
+	titleFemale                               // 'Ms.'
+	suffix                                    // 'Jr.'
+	name($gender = null|'male'|'female')      // 'Dr. Zane Stroman'
+	firstName($gender = null|'male'|'female') // 'Maynard'
+	firstNameMale                             // 'Maynard'
+	firstNameFemale                           // 'Rachel'
+	lastName                                  // 'Zulauf'
+
+	
+### Endereços
+
+	cityPrefix                          // 'Lake'
+	secondaryAddress                    // 'Suite 961'
+	state                               // 'NewMexico'
+	stateAbbr                           // 'OH'
+	citySuffix                          // 'borough'
+	streetSuffix                        // 'Keys'
+	buildingNumber                      // '484'
+	city                                // 'West Judge'
+	streetName                          // 'Keegan Trail'
+	streetAddress                       // '439 Karley Loaf Suite 897'
+	postcode                            // '17916'
+	address                             // '8888 Cummings Vista Apt. 101, Susanbury, NY 95473'
+	country                             // 'Falkland Islands (Malvinas)'
+	latitude($min = -90, $max = 90)     // 77.147489
+	longitude($min = -180, $max = 180)  // 86.211205
+	
 ### Datas
 
 	unixTime($max = 'now')                // 58781813
