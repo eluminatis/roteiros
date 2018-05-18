@@ -4,7 +4,7 @@ adicione todos os arquivos do repositorio cada um em sua pasta e roda
 
 	composer dump-autoload
 	
-	php artisan migrate:refresh --seed
+	php artisan migrate:fresh --seed
 	
 pronto, vc já tem uma base de dados com todos os estados brasileiros e suas cidades
 
