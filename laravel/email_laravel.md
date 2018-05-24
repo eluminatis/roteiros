@@ -10,11 +10,11 @@ Se todos os emails enviados pelo seu app forem ter o mesmo endereço de remetent
 caso cada email possa ter um remetente diferente configure diretamente no `->from()` do metodo `build()`
 
 ```php
-	public function build()
-	{
-	    return $this->from('example@example.com')
-			->view('emails.orders.shipped');
-	}
+public function build()
+{
+    return $this->from('example@example.com')
+        ->view('emails.orders.shipped');
+}
 ```
 
 ### Mailables
@@ -26,32 +26,32 @@ Cada tipo de email disparado por seu app é representado por uma classe mailable
 Toda a configuração é feita no build. Dentro deste método, você pode chamar vários métodos, como from, subject, view, e attach para configurar apresentação e entrega do e-mail.
 
 ```php
-	public function build()
-	{
-	    return $this->from('example@example.com')
-			->subject('Seu assunto')
-			->view('emails.seuTemplate')
-			->attach('caminho para o anexo se necessário');
-	}
+public function build()
+{
+    return $this->from('example@example.com')
+        ->subject('Seu assunto')
+        ->view('emails.seuTemplate')
+        ->attach('caminho para o anexo se necessário');
+}
 
 ```
 
 Ao anexar arquivos a uma mensagem, você também pode especificar o nome de exibição e / ou o tipo MIME, passando um segundo argumento (do tipo `array`) para o método `attach()`:
 
 ```php
-	public function build()
-	{
-	    return $this->from('example@example.com')
-			->subject('Seu assunto')
-			->view('emails.seuTemplate')
-			->attach('/path/to/file', [
-		                'as' => 'name.pdf',
-		                'mime' => 'application/pdf',
-			]);
-			
-			//também existe o ->text('texto desagatemelizado') para textos planos
-	}
-	
+public function build()
+{
+    return $this->from('example@example.com')
+        ->subject('Seu assunto')
+        ->view('emails.seuTemplate')
+        ->attach('/path/to/file', [
+                    'as' => 'name.pdf',
+                    'mime' => 'application/pdf',
+        ]);
+        
+        //também existe o ->text('texto desagatemelizado') para textos planos
+}
+
 ```
 
 ## Passando variaveis para a classe Mailable
@@ -59,51 +59,51 @@ Ao anexar arquivos a uma mensagem, você também pode especificar o nome de exib
 Você deve definir variáveis públicas na classe mailable e passar variáveis pelo construtor para ela e automaticamente ela estará disponível dentro de sua view
  
 ```php
-	<?php
+<?php
 
-	namespace App\Mail;
+namespace App\Mail;
 
-	use App\Order;
-	use Illuminate\Bus\Queueable;
-	use Illuminate\Mail\Mailable;
-	use Illuminate\Queue\SerializesModels;
+use App\Order;
+use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
 
-	class OrderShipped extends Mailable
-	{
-	    use Queueable, SerializesModels;
+class OrderShipped extends Mailable
+{
+    use Queueable, SerializesModels;
 
-	    /**
-	     * a variavel que recebe um array de variveis que vc queira 			passar
-	     */
-	    public $data;
+    /**
+     * a variavel que recebe um array de variveis que vc queira passar
+     */
+    public $data;
 
-	    /**
-	     * o construtor recebe a variavel e a joga dentra da var publica
-	     * e agora vc pode usa-la dentro da view
-	     */
-	    public function __construct($data)
-	    {
-		$this->data = $data;
-	    }
+    /**
+     * o construtor recebe a variavel e a joga dentra da var publica
+     * e agora vc pode usa-la dentro da view
+     */
+    public function __construct($data)
+    {
+        $this->data = $data;
+    }
 
-	    /**
-	     * Build the message.
-	     *
-	     * @return $this
-	     */
-	    public function build()
-	    {
-		return $this->view('emails.template');
-	    }
-	}
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
+    public function build()
+    {
+        return $this->view('emails.template');
+    }
+}
 ```
 
 Depois de os dados serem passados pelo construtor e definidos como propriedade publica, você poderá acessá-los de dentro da view
 
 ```php    
-	<div>
-	    <p>Preço: {{ $data['var1'] }}</p>
-	</div>
+<div>
+    <p>Preço: {{ $data['var1'] }}</p>
+</div>
 ```
 
 ## Inserindo imagens no corpo do email
@@ -111,11 +111,11 @@ Depois de os dados serem passados pelo construtor e definidos como propriedade p
 o laravel disponibiliza a variavel `$message` nos mailables com alguns métodos que facilitam seu trabalho. Um deles é o método de inserir imagens no corpo do email. Na view, coloque a imagem da seguinte forma:
 
 ```php
-	<body>
-	    Aqui temos um exemplo de inserção de imagem no corpo
-	    
-	    <img src="{{ $message->embed(asset('images/email_rodape.png')) }}">
-	</body>
+<body>
+    Aqui temos um exemplo de inserção de imagem no corpo
+    
+    <img src="{{ $message->embed(asset('images/email_rodape.png')) }}">
+</body>
 ```
 
 ## Enviando emails
@@ -125,34 +125,34 @@ No seu controller registre o uso da fachade `Illuminate\Support\Facades\Mail` e 
 O `to()` aceita um endereço de email, uma instância do usuário ou uma coleção de usuários. Se você passar um objeto ou uma coleção de objetos, o programa de email usará automaticamente as propriedades email e name ao configurar os destinatários de e-mail.
 
 ```php
-	<?php
+<?php
 
-	namespace App\Http\Controllers;
+namespace App\Http\Controllers;
 
-	use App\Http\Controllers\Controller;
-	use App\Mail\SeuMailable; //importando seu mailable
-	use Illuminate\Support\Facades\Mail; //importando facade de emails
+use App\Http\Controllers\Controller;
+use App\Mail\SeuMailable; //importando seu mailable
+use Illuminate\Support\Facades\Mail; //importando facade de emails
 
-	class OrderController extends Controller
-	{
-	    /**
-	     * Envia um email qualquer a um tolo qualquer
-	     */
-	    public function enviaEmail(){
-			$data['var1'] = 'bla bla bla';
-			$data['var2'] = 'ble ble ble';
-			
-			Mail::to('email@destinatario.com')->send(new SeuMailable($data));
-			
-			ou
-			
-			Mail::to('email@destinatario.com')
-				->cc($moreUsers)
-				->bcc($evenMoreUsers)
-				->send(new SeuMailable($data));
-			
-	    }
-	}
+class OrderController extends Controller
+{
+    /**
+     * Envia um email qualquer a um tolo qualquer
+     */
+    public function enviaEmail(){
+        $data['var1'] = 'bla bla bla';
+        $data['var2'] = 'ble ble ble';
+        
+        Mail::to('email@destinatario.com')->send(new SeuMailable($data));
+        
+        ou
+        
+        Mail::to('email@destinatario.com')
+            ->cc($moreUsers)
+            ->bcc($evenMoreUsers)
+            ->send(new SeuMailable($data));
+        
+    }
+}
 ```
 
 ## Visualizando mailables no navegador
@@ -160,10 +160,10 @@ O `to()` aceita um endereço de email, uma instância do usuário ou uma coleç�
 Para fins de desenvolvimento você pode visualizar seus mailables no navegador simplesmente retornando-o na rota de testes:
 
 ```php
-	Route::get('/mailable_teste', function () {
-		$data['var1'] = 'bla bla bla';
-		$data['var2'] = 'ble ble ble';
+Route::get('/mailable_teste', function () {
+    $data['var1'] = 'bla bla bla';
+    $data['var2'] = 'ble ble ble';
 
-		return new App\Mail\SeuMailable($data);
-	});
+    return new App\Mail\SeuMailable($data);
+});
 ```
