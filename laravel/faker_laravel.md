@@ -210,7 +210,7 @@ Uma vez gerada vc pode chamar os atributos dela mesmo dentro de um loop que semp
 
 ### Html
 
-```html
+```php
 	//Generate HTML document which is no more than 2 levels deep, and no more than 3 elements wide at any level.
 	randomHtml(2,3)   
 	
