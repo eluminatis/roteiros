@@ -42,9 +42,50 @@ arquivo config/queue.php
 
 #### para esse exemplo vamos fazer uma fila de emails
 
-- crie a fila
+- Crie a fila
 
 ```php
 php artisan make:job EmailQueue
 ```
 
+- A classe job ficará +- assim
+
+```php
+<?php
+
+namespace App\Jobs;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+
+class EmailQueue implements ShouldQueue
+{
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    protected $data //var que recebe os dados que vem pelo construct
+    
+    /**
+     * Create a new job instance.
+     *
+     * @return void
+     */
+    public function __construct($data)
+    {
+        $this->data = $data;
+    }
+
+    /**
+     * Execute the job.
+     *
+     * @return void
+     */
+    public function handle()
+    {
+        // aqui fica o metodo que vc vdeve montar usando o $this->data
+    }
+}
+
+```
