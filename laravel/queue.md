@@ -113,8 +113,8 @@ $data['token'] = '123'; //dados para criar o mailable
 $mailable = new App\Mail\EmailConfirmation($data); //criando mailable
 $destinatario = 'peterson.jfp@gmail.com'; //destinatario do mailable
 App\Jobs\EmailQueue::dispatch($destinatario, $mailable);
-                //->delay(now()->addSeconds(30)) add um delay para execução apos cair na fila
-                //->onQueue('olar') escolhe a fila p colocar o job, se nenhuma for escolhida caira na fila default
+                ->delay(now()->addSeconds(30)) //add um delay para execução apos cair na fila
+                ->onQueue('emails') //escolhe a fila p colocar o job, se nenhuma for escolhida caira na fila default
 ```
 
 ## Instanciamos um laravel-worker para tomar conta da fila
