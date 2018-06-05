@@ -123,6 +123,13 @@ add ao composer
 },
 ```
 
+### Removendo arquivos desnecessários ao controle de versão
+Adicione ao .gitignore da pasta raiz as seguintes linhas
+```
+/nbproject //se estiver usando netbeans
+/storage/*
+```
+
 ### Convenções de nomenclatura:
 
 Quando você vai criar um `model`, coloque o nome no singular com a primeira letra maiúscula. Ele irá alterar essa string para gerar `controler` e `migration` compatíveis com a nomenclatura padrão
