@@ -61,12 +61,13 @@ nas chamadas para arquivos estaticos substitua o caminha relativo pela função 
 
 ## separando configurações por instância e servindo arquivos estáticos de forma mais perfomática
 
-em *wttd/* instale as dependencias: python-decouple, dj-database-url e dj-static
-
-    pip install python-decouple
-    pip install dj-database-url
-    pip install dj-static
-
+em *wttd/* instale as dependencias
+```python
+    pip install python-decouple     # desacopla as vars do settings para um .env
+    pip install dj-database-url     # ajuda a criar url de database a partir do .env
+    pip install dj-static           # serve os arquivos estaticos sem precisar passar pelo processamento
+    pip install pillow              # lib para/se trabalhar com upload e validação de imagens
+```
 configurar o arquivo settings.py e o arquivo .env
 
 #### arquivo *eventex/settings.py*
@@ -92,7 +93,8 @@ faça as substituições
     TIME_ZONE = 'America/Sao_Paulo'
 
     STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # pasta que receberá os estáticos do projeto
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')      # pasta que receberá os uploads do projeto
 ```
 
 #### arquivo *wttd/.env*

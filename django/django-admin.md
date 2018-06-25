@@ -23,7 +23,7 @@ Definindo um campo como apenas leitura
 class MyModelAdmin(admin.ModelAdmin):
    readonly_fields = (''field’,)
 ```
-Personalizando as colunas que aparecem na listagem do django-admin
+Personalizando as colunas que aparecem na listagem do django-admin ('index do model')
 ```python
 #em admin.py da sua app
 class MyModelAdmin(admin.ModelAdmin):
