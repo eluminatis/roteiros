@@ -13,9 +13,10 @@ crie a pasta do projeto e entre nela
 
 crie o venv
 
-    python -m venv .wttd
+    # Como boa prática, utilizar o nome venv ou .venv
+    python -m venv .venv
 
-ative o venv
+ative o `venv`
 
     source .wttd/bin/activate
 
@@ -37,21 +38,26 @@ no arquivo *wttd/eventex/settings.py* adicione a lista INSTALLED_APPS o app que 
     'eventex.core',
 
 no arquivo *eventex/urls.py* importe as views do core e adicione a rota que sera atendida por seu metodo **home**
+
 ```python
     import eventex.core.views
     ...
     path('', eventex.core.views.home),
 ```
+
 no arquivo *eventex/core/views.py* adicione o método que atenderá essa rota
+
 ```python
     def home(request):
         return render(request, 'index.html')
 ```
+
 perceba que o metodo home chama o arquivo index.html que é um template, crie uma pasta *templates/* dentro de *core/* e coloque seu *index.html* la
 
 ainda na pasta *core/* crie a pasta *static/* e coloque todos os arquivos estaticos dos quais seu template depende dentro dela
 
 nas chamadas para arquivos estaticos substitua o caminha relativo pela função statis do python
+
 ```python
     para fins de exemplo substitua todas as strings do tipo
     "img/favicon.ico"
@@ -70,7 +76,9 @@ em *wttd/* instale as dependencias: python-decouple, dj-database-url e dj-static
 configurar o arquivo settings.py e o arquivo .env
 
 #### arquivo *eventex/settings.py*
-faça as substituições
+
+faça as substituições:
+
 ```python
     import os
     from decouple import config
@@ -96,13 +104,16 @@ faça as substituições
 ```
 
 #### arquivo *wttd/.env*
-crie o arquivo .env na pasta raiz do projeto e adicione
+
+crie o arquivo .env na pasta raiz do projeto e adicione:
 
     SECRET_KEY=#coloque_aqui_sua_secret_key (sem espaços nem aspas)
     DEBUG=True
 
 #### arquivo *eventex/wsgi.py*
+
 importe o Cling e envolva o get_wsgi_application() com ele
+
 ```python
     from dj_static import Cling
     ...
@@ -114,6 +125,7 @@ importe o Cling e envolva o get_wsgi_application() com ele
     pip freeze > requirements.txt
 
 ## Preparando o projeto para o Heroku
+
 no *wttd/requirements.txt* adicione as seguintes dependencias
 
     gunicorn==19.8.1
@@ -124,6 +136,7 @@ no *wttd/requirements.txt* adicione as seguintes dependencias
     web: gunicorn eventex.wsgi --log-file -
 
 ## Inicializando o repositório git
+
 em *wttd/*
 
     git init
@@ -147,6 +160,7 @@ add o .gitignore a seu projeto, faça commit e em seguida adicione todo o resto
     git push heroku master --force
 
 ## começando a trabalhar com banco de dados e o admin do django
+
 roda as migrations
 
     manage migrate
@@ -156,5 +170,3 @@ crie o super usuário
     manage createsuperuser
 
 pronto, já pode acessar o admin do django em http://127.0.0.1:8000/admin/
-
-
