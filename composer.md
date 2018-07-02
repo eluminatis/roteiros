@@ -6,7 +6,7 @@ Inicialmente você precisa de uma conta no Packagist e o composer instalado na s
 
 Feito isso rode o comando:
 
-```
+```bash
 composer init
 ```
 
@@ -16,7 +16,7 @@ Siga as instruções na tela descritas abaixo
 
 Ele deve respeitar o nome de usuário do GitHub/repositório do GitHub
 
-```
+```bash
 eluminatis/meu_projeto
 ```
 
@@ -28,7 +28,7 @@ Essa descrição ficará disponível no site do Packagist
 
 O autor deve seguir exatamente a máscara abaixo:
 
-```
+```bash
 Chuck Norris <chuck_norris@roundhousekick.com>
 ```
 
@@ -89,7 +89,7 @@ Para que seu pacote seja alocado corretamente, você precisa dizer onde "mora" s
 
 ```json
 "autoload": {
-    "psr-4" : { 
+    "psr-4" : {
         "Eluminatis\\MeuOutroNamespace\\" : "src"
     }
 }
@@ -119,7 +119,7 @@ Adicione seu pacote seguindo esse padrão:
 
 Tudo pronto, teste com:
 
-```
+```bash
 composer require eluminatis/meu_projeto dev-master
 ```
 
