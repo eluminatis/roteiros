@@ -49,15 +49,14 @@ Altere o timezone default para o BR em:
 
 ### Ajustes finos
 
-Em: 
+Em:
 
-    app/Providers/AppServiceProvider.php@boot 
-
+    app/Providers/AppServiceProvider.php@boot
 
 addicionar no método:
 
-    Schema::defaultStringLength(191) 
-    
+    Schema::defaultStringLength(191)
+
 No `namespace`:
 
     use Illuminate\Support\Facades\Schema; 
@@ -124,13 +123,15 @@ add ao composer
 ```
 
 ### Removendo arquivos desnecessários ao controle de versão
+
 Adicione ao .gitignore da pasta raiz as seguintes linhas
-```
+
+```bash
 /nbproject //se estiver usando netbeans
 /storage/*
 ```
 
-### Convenções de nomenclatura:
+### Convenções de nomenclatura
 
 Quando você vai criar um `model`, coloque o nome no singular com a primeira letra maiúscula. Ele irá alterar essa string para gerar `controler` e `migration` compatíveis com a nomenclatura padrão
 
@@ -140,7 +141,7 @@ Links de ações colocados em botos nas tabelas de crud devem seguir a seguinte 
 
 ## Banco de dados
 
-### Criando os dados da aplicação (Migrations):
+### Criando os dados da aplicação (Migrations)
 
 Nesse ponto você precisa já ter definido todas as tabelas e relações requeridas para sua aplicação. De preferência utilizar algum gerador de MER (Modelo Entidade Relacionamento)
 
@@ -185,7 +186,7 @@ $table->integer('votes')->nullable(); // aceitar null
 $table->string('email')->unique(); //não aceita dois registros com o mesmo valor nessa coluna
 ```
 
-### Add chave estrangeira:
+### Add chave estrangeira
 
 ```
 $table->integer('user_id')->unsigned();
@@ -202,8 +203,7 @@ Caso tenha feito um `php artisan make:model` com nome errado, delete os arquivos
 
     composer dump-autoload
 
-
-## Integrando o adminLTE:
+## Integrando o adminLTE
 
 Após ter feito todos os passos anteriores vamos integrar o `adminLTE` ao laravel. Instalar o pacote com o `composer`
 

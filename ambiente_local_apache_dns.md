@@ -22,9 +22,6 @@ Vá até:
 
     /etc/apache2/sites-available
 
-
 [ Descrever aqui o processo de deploy de um site ]
 
 ### Dnsmasq
-
-
