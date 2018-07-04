@@ -58,3 +58,12 @@ Usando o banco de dados como `:memory` acelera os testes, bem como `sqlite`. Fut
 
 O Debugging também é desabilitado para mostrar apenas os resultados dos testes.
 
+## Tipos de testes
+
+### Testes Unitários (Unit Testing)
+
+Servem para testar suas classes: Models, Repositórios, Funções, etc.
+
+### Testes de Funcionalidade (Feature Testing)
+
+Servem para testar se seu código, por exemplo, acessa os controllers e verica (asserts) se as ações tomadas são as esperadas, ou até mesmo erros. Por exemplo, acessando uma página que precisa de autenticação, se um erro gera uma _Flash Message_ na sessão ou até mesmo se um redirecionamento ocorre de forma correta.
