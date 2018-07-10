@@ -1,6 +1,8 @@
 # TDD com Laravel e PHPUnit
 
-Tutorial baseado na série de artigos de Jeff Simons Decena. Link [aqui](https://medium.com/@jsdecena/simple-tdd-in-laravel-with-11-steps-c475f8b1b214).
+Tutorial baseado na série de artigos de Jeff Simons Decena. Link [aqui](https://medium.com/@jsdecena/simple-tdd-in-laravel-with-11-steps-c475f8b1b214). (Em inglês)
+
+Foi utilizado também [este link](https://www.devmedia.com.br/test-driven-development-tdd-simples-e-pratico/18533) do DevMedia. (Em português)
 
 ## Preparando a suíte de testes do Laravel
 
@@ -58,6 +60,20 @@ Usando o banco de dados como `:memory` acelera os testes, bem como `sqlite`. Fut
 
 O Debugging também é desabilitado para mostrar apenas os resultados dos testes.
 
+### Sanity Checks
+
+Caso você utilize o servidor de desenvolvimento incluído com o Laravel, você não terá tantos problemas com isso. Caso contrário, é necessário que você limpe os caches de `views`, `rotas` e demais recursos que o Laravel cacheia. Utilize os comandos:
+
+```bash
+artisan cache:clear
+artisan view:clear
+artisan route:clear
+artisan clear-compiled
+artisan config:clear
+```
+
+Uma boa ideia é encapsular esses comandos em um único comando do Artisan
+
 ## Tipos de testes
 
 ### Testes Unitários (Unit Testing)
@@ -67,3 +83,22 @@ Servem para testar suas classes: Models, Repositórios, Funções, etc.
 ### Testes de Funcionalidade (Feature Testing)
 
 Servem para testar se seu código, por exemplo, acessa os controllers e verica (asserts) se as ações tomadas são as esperadas, ou até mesmo erros. Por exemplo, acessando uma página que precisa de autenticação, se um erro gera uma _Flash Message_ na sessão ou até mesmo se um redirecionamento ocorre de forma correta.
+
+
+## Ciclo do TDD
+
+Red, Green, Refactor. Ou seja:
+
+- Escrevemos um Teste que inicialmente não passa (Red)
+- Adicionamos uma nova funcionalidade do sistema
+- Fazemos o Teste passar (Green)
+- Refatoramos o código da nova funcionalidade (Refactoring)
+- Escrevemos o próximo Teste
+
+
+    Novo Teste -> Teste Falhando -> Nova Funcionalidade -> Teste Passando -> Refatoração (Retorna)
+
+
+### Exemplos de TDD com Laravel
+
+## TODO
