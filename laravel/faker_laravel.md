@@ -1,54 +1,57 @@
 # Faker laravel
 
-Faker oferece um meio prático de criar dados falsos para pupular seus bancos de dados para teste, em qualquer lugar do laravel você pode gerar uma instancia em pt-BR da biblioteca faker fazendo
+Faker oferece um meio prático de criar dados falsos para pupular seus bancos de dados para teste, em qualquer lugar do laravel você pode gerar uma instancia em pt-BR da biblioteca faker fazendo:
+
 ```php
 
 $faker = Faker\Factory::create('pt_BR');
 
 ```
-	
-Uma vez gerada vc pode chamar os atributos dela mesmo dentro de um loop que sempre vai sair diferente
+
+Isso inclui o Laravel `tinker`. Caso precise testar, basta chamar o comando acima no shell do tinker.
+
+Uma vez gerada vc pode chamar os atributos dela mesmo dentro de um loop que sempre vai sair diferente.
 
 ## Principais tipos de dados
 
 ### Dados especificos para brasileiros
 	
 ```php
-	// Generates a random region name
-	$faker->region; // 'Nordeste'
+// Generates a random region name
+$faker->region; // 'Nordeste'
 
-	// Generates a random region abbreviation
-	$faker->regionAbbr; // 'NE'
-	
-	$faker->areaCode;  // 21
-	$faker->cellphone; // 9432-5656
-	$faker->landline;  // 2654-3445
-	$faker->phone;     // random landline, 8-digit or 9-digit cellphone number
+// Generates a random region abbreviation
+$faker->regionAbbr; // 'NE'
 
-	// Using the phone functions with a false argument returns unformatted numbers
-	$faker->cellphone(false); // 74336667
+$faker->areaCode;  // 21
+$faker->cellphone; // 9432-5656
+$faker->landline;  // 2654-3445
+$faker->phone;     // random landline, 8-digit or 9-digit cellphone number
 
-	// cellphone() has a special second argument to add the 9th digit. Ignored if generated a Radio number
-	$faker->cellphone(true, true); // 98983-3945 or 7343-1290
+// Using the phone functions with a false argument returns unformatted numbers
+$faker->cellphone(false); // 74336667
 
-	// Using the "Number" suffix adds area code to the phone
-	$faker->cellphoneNumber;       // (11) 98309-2935
-	$faker->landlineNumber(false); // 3522835934
-	$faker->phoneNumber;           // formatted, random landline or cellphone (obeying the 9th digit rule)
-	$faker->phoneNumberCleared;    // not formatted, random landline or cellphone (obeying the 9th digit rule)
-	
-	// The name generator may include double first or double last names, plus title and suffix
-	$faker->name; // 'Sr. Luis Adriano Sepúlveda Filho'
+// cellphone() has a special second argument to add the 9th digit. Ignored if generated a Radio number
+$faker->cellphone(true, true); // 98983-3945 or 7343-1290
 
-	// Valid document generators have a boolean argument to remove formatting
-	$faker->cpf;        // '145.343.345-76'
-	$faker->cpf(false); // '45623467866'
-	$faker->rg;         // '84.405.736-3'
-	$faker->rg(false);  // '844057363'
-	
-	// Generates a Brazilian formatted and valid CNPJ
-	$faker->cnpj;        // '23.663.478/0001-24'
-	$faker->cnpj(false); // '23663478000124'
+// Using the "Number" suffix adds area code to the phone
+$faker->cellphoneNumber;       // (11) 98309-2935
+$faker->landlineNumber(false); // 3522835934
+$faker->phoneNumber;           // formatted, random landline or cellphone (obeying the 9th digit rule)
+$faker->phoneNumberCleared;    // not formatted, random landline or cellphone (obeying the 9th digit rule)
+
+// The name generator may include double first or double last names, plus title and suffix
+$faker->name; // 'Sr. Luis Adriano Sepúlveda Filho'
+
+// Valid document generators have a boolean argument to remove formatting
+$faker->cpf;        // '145.343.345-76'
+$faker->cpf(false); // '45623467866'
+$faker->rg;         // '84.405.736-3'
+$faker->rg(false);  // '844057363'
+
+// Generates a Brazilian formatted and valid CNPJ
+$faker->cnpj;        // '23.663.478/0001-24'
+$faker->cnpj(false); // '23663478000124'
 ```	
 
 ### Textos
