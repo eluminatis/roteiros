@@ -1,11 +1,13 @@
 # Instalação basica de um projeto em python/django
-Para esse exemplo vamos usar *wttd* como nome do diretorio de trabalho e *eventex* como nome do projeto
 
-*Para facilitar sua vida crie o seguinte alias em seu bashrc ou zshrc*
+Para esse exemplo vamos usar _wttd_ como nome do diretorio de trabalho e _eventex_ como nome do projeto
+
+_Para facilitar sua vida crie o seguinte alias em seu bashrc ou zshrc_
 
     alias manage='python $VIRTUAL_ENV/../manage.py'
 
 ## Criando o projeto
+
 crie a pasta do projeto e entre nela
 
     mkdir wttd
@@ -33,11 +35,11 @@ entre no projeto e crie a app núcleo do projeto
     cd eventex
     manage startapp core
 
-no arquivo *wttd/eventex/settings.py* adicione a lista INSTALLED_APPS o app que vc acabou de criar para o projeto reconhecê-lo
+no arquivo _wttd/eventex/settings.py_ adicione a lista INSTALLED_APPS o app que vc acabou de criar para o projeto reconhecê-lo
 
     'eventex.core',
 
-no arquivo *eventex/urls.py* importe as views do core e adicione a rota que sera atendida por seu metodo **home**
+no arquivo _eventex/urls.py_ importe as views do core e adicione a rota que sera atendida por seu metodo **home**
 
 ```python
     import eventex.core.views
@@ -45,18 +47,18 @@ no arquivo *eventex/urls.py* importe as views do core e adicione a rota que sera
     path('', eventex.core.views.home),
 ```
 
-no arquivo *eventex/core/views.py* adicione o método que atenderá essa rota
+no arquivo _eventex/core/views.py_ adicione o método que atenderá essa rota
 
 ```python
     def home(request):
         return render(request, 'index.html')
 ```
 
-perceba que o metodo home chama o arquivo index.html que é um template, crie uma pasta *templates/* dentro de *core/* e coloque seu *index.html* la
+perceba que o metodo home chama o arquivo index.html que é um template, crie uma pasta _templates/_ dentro de _core/_ e coloque seu _index.html_ la
 
-ainda na pasta *core/* crie a pasta *static/* e coloque todos os arquivos estaticos dos quais seu template depende dentro dela
+ainda na pasta _core/_ crie a pasta _static/_ e coloque todos os arquivos estaticos dos quais seu template depende dentro dela
 
-nas chamadas para arquivos estaticos substitua o caminha relativo pela função statis do python
+nas chamadas para arquivos estaticos substitua o caminha relativo pela função static do python
 
 ```python
     para fins de exemplo substitua todas as strings do tipo
@@ -67,16 +69,18 @@ nas chamadas para arquivos estaticos substitua o caminha relativo pela função 
 
 ## separando configurações por instância e servindo arquivos estáticos de forma mais perfomática
 
-em *wttd/* instale as dependencias
+em _wttd/_ instale as dependencias
+
 ```python
     pip install python-decouple     # desacopla as vars do settings para um .env
     pip install dj-database-url     # ajuda a criar url de database a partir do .env
     pip install dj-static           # serve os arquivos estaticos sem precisar passar pelo processamento
     pip install pillow              # lib para/se trabalhar com upload e validação de imagens
 ```
+
 configurar o arquivo settings.py e o arquivo .env
 
-#### arquivo *eventex/settings.py*
+#### arquivo _eventex/settings.py_
 
 faça as substituições:
 
@@ -84,7 +88,7 @@ faça as substituições:
     import os
     from decouple import config
     from dj_database_url import parse as dburl
-    ...
+
     ALLOWED_HOSTS = ['*']
 
     SECRET_KEY = config('SECRET_KEY')
@@ -105,14 +109,14 @@ faça as substituições:
     MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')      # pasta que receberá os uploads do projeto
 ```
 
-#### arquivo *wttd/.env*
+#### arquivo _wttd/.env_
 
 crie o arquivo .env na pasta raiz do projeto e adicione:
 
     SECRET_KEY=#coloque_aqui_sua_secret_key (sem espaços nem aspas)
     DEBUG=True
 
-#### arquivo *eventex/wsgi.py*
+#### arquivo _eventex/wsgi.py_
 
 importe o Cling e envolva o get_wsgi_application() com ele
 
@@ -128,22 +132,22 @@ importe o Cling e envolva o get_wsgi_application() com ele
 
 ## Preparando o projeto para o Heroku
 
-no *wttd/requirements.txt* adicione as seguintes dependencias
+no _wttd/requirements.txt_ adicione as seguintes dependencias
 
     gunicorn==19.8.1
     psycopg2==2.7.4
 
-#### em *wttd/* crie o arquivo Procfile com o seguinte conteudo
+#### em _wttd/_ crie o arquivo Procfile com o seguinte conteudo
 
     web: gunicorn eventex.wsgi --log-file -
 
 ## Inicializando o repositório git
 
-em *wttd/*
+em _wttd/_
 
     git init
 
-ainda em *wttd/* crie o arquivo .gitignore e adicione o seguinte conteudo
+ainda em _wttd/_ crie o arquivo .gitignore e adicione o seguinte conteudo
 
     .env            //seu .env local
     .vscode         //arquivos de sua ide

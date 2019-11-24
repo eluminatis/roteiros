@@ -1,4 +1,5 @@
 Como trabalhar com objetos vindos do banco de dados em django
+
 ```python
 #criando um objetona memoria
 q = Question(question_text="What's new?", pub_date=timezone.now())
@@ -48,7 +49,7 @@ datetime.datetime(2012, 2, 26, 13, 0, 0, 775217, tzinfo=<UTC>)
 # inicia com
 >>> q = Question.objects.filter(question_text__startswith='What')
 # inicia com, mas ignorando caixa alta/caixa baixa
->>> q = Question.objects.filter(question_text__startswith='What')
+>>> q = Question.objects.filter(question_text__istartswith='What')
 # termina com
 >>> q = Question.objects.filter(question_text__endswith='up')
 # termina com, mas ignorando caixa alta/caixa baixa
@@ -59,7 +60,7 @@ datetime.datetime(2012, 2, 26, 13, 0, 0, 775217, tzinfo=<UTC>)
 >>> q = Question.objects.get(pub_date__month=12)
 # datetime tem dia de 21
 >>> q = Question.objects.get(pub_date__day=21)
-# datetime tem dia da semana como segunda-feira 
+# datetime tem dia da semana como segunda-feira
 # ('1 == domingo' '2 == segunda' ... '7 == sabado')
 >>> q = Question.objects.get(pub_date__week_day=2)
 # datetime tem data == Null
