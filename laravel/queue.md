@@ -8,9 +8,8 @@ Nesse tutorial usaremos apenas o modo database
 - Criamos varias filas de acordo com nossa necessidade para classificar os tipos de jobs que vamos enfileirar
 - Criamos os jobs que receberão nossas variaveis pelo construct e jogarão em atributos protected para poder usar no processamento
 - Uma vez criado um job e preparado para receber as variaveis pelo construtor e passar para seus proprios atributos 'protected', criamos nossa logica de processamento dentro do metodo handle() usando os atributos protected criados no construtor para popular as variaveis da logica
-- Nos controllers instanciamos o job passando o que precisamos  de variaveis para seu construtor ('as variaveis devem ser passadas no método dispatch para cair no construtor do job') e damos um dispatch para mandar o job pra fila
+- Nos controllers instanciamos o job passando o que precisamos de variaveis para seu construtor ('as variaveis devem ser passadas no método dispatch para cair no construtor do job') e damos um dispatch para mandar o job pra fila
 - Instanciamos um laravel-worker que vai tomar conta dessa fila e processar cada job que cair nela, apagando os concluidos e mandando para a tabela failed_jobs aqueles que não puderam ser feitos por algum motivo
-
 
 ## Instruções
 
@@ -38,17 +37,17 @@ arquivo config/queue.php
     'retry_after' => 90,    //tempo para tentar refazer um job falhado
 ],
 //nossa fila personalizada emails
-'database' => [             //nome da conexão
+    'database' => [         //nome da conexão
     'driver' => 'database', //driver
     'table' => 'jobs',      //tabela ('mantenha o padrao jobs')
-    'queue' => 'emails',   //nome da fila
+    'queue' => 'emails',    //nome da fila
     'retry_after' => 90,    //tempo para tentar refazer um job falhado
 ],
 ```
 
 ### Criamos os jobs que receberão nossas variaveis pelo construct e jogarão em atributos protected para poder usar no processamento
 
-#### para esse exemplo vamos fazer uma fila de emails que recebe duas variaveis: o remetente e o laravel_mailable ja instanciado e preenchido 
+#### para esse exemplo vamos fazer uma fila de emails que recebe duas variaveis: o remetente e o laravel_mailable ja instanciado e preenchido
 
 - Crie a fila
 
@@ -76,8 +75,8 @@ class EmailQueue implements ShouldQueue
 
     //attrs que recebem os dados que vem pelo construct
     protected $destinatario;
-    protected $mailable; 
-    
+    protected $mailable;
+
     /**
      * Create a new job instance.
      *
@@ -106,7 +105,7 @@ class EmailQueue implements ShouldQueue
 
 ## No controller instanciamos o job e damos um dispatch para mandar ele pra fila
 
-### Instanciamos o job passando o que precisamos  de variaveis para seu metodo dispatch() que jogara as vars passadas no construct do job
+### Instanciamos o job passando o que precisamos de variaveis para seu metodo dispatch() que jogara as vars passadas no construct do job
 
 ```php
 $data['token'] = '123'; //dados para criar o mailable
@@ -120,7 +119,6 @@ App\Jobs\EmailQueue::dispatch($destinatario, $mailable);
 ## Instanciamos um laravel-worker para tomar conta da fila
 
 ### O worker processa cada job que cair na fila, apagando os concluidos e mandando para a tabela failed_jobs aqueles que não puderam ser feitos por algum motivo
-
 
 ```php
 php artisan queue:work
